@@ -19,5 +19,43 @@ const observer = {
                    }
         
         })
+    },
+    viewAllRiders:()=>{
+        app.get('/obvriders',async(req,res)=>{
+        try {
+            const rider = await Rider.find({},{FirstName:true,LastName:true,UserName:true,Email:true});
+            res.status(200).json(rider);
+        } catch (error) {
+            console.log(error.message);
+        }
+        })
+    },
+    viewAllCustomers:()=>{
+        app.get('/obvcustomers',async(req,res)=>{
+        try {
+            const customer = await Customer.find({},{FirstName:true,LastName:true,UserName:true,Email:true});
+            res.status(200).json(customer);
+        } catch (error) {
+            console.log(error.message);
+        }
+        })
+    },
+    showCustomerDeliveryDetails:()=>{
+        app.get('obvcudeliv',async(req,res)=>{
+            try {
+                const customer = Customer.find({UserName:req.body.UserName},{Deliveries:true});
+                res.status(200).json(customer);
+            } catch (error) {
+                console.log(error.message);
+            }
+        })
     }
+}
+
+
+export default function() {
+    observer.register();
+    observer.showCustomerDeliveryDetails();
+    observer.viewAllCustomers();
+    observer.viewAllRiders();
 }
