@@ -53,7 +53,7 @@ const observer = {
 }
 
 
-export default function() {
+export default function ObserverRoutes() {
     observer.register();
     observer.showCustomerDeliveryDetails();
     observer.viewAllCustomers();
