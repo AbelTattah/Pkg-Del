@@ -28,7 +28,7 @@ const cust = {
 
     },
     messageRider:()=>{
-        app.put('custmsgrider',async(req,res)=>{
+        app.put('/custmsgrider',async(req,res)=>{
             try {
                 const rider = Rider.findOneAndUpdate({UserName:req.body.UserName},{Messages:req.body.Messages});
                 res.status(200).json(rider);
@@ -38,7 +38,7 @@ const cust = {
         })
     },
     requestDelivery: ()=>{
-        app.put('custdelireq',async(req,res)=>{
+        app.put('/custdelireq',async(req,res)=>{
             try {
                 const delivery = await Customer.findOneAndUpdate({UserName:req.body.UserName},{Deliveries:req.body.Deliveries});
                 res.status(200).json(delivery);
@@ -48,7 +48,7 @@ const cust = {
         })
     },
     location: () => {
-        app.put('custlocation',async(req,res)=>{
+        app.put('/custlocation',async(req,res)=>{
             try {
                 const location = await Customer.findOneAndUpdate({UserName:req.body.UserName},{Location:req.body.Location});
                 res.status(200).json(location);

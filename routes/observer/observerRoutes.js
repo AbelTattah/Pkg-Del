@@ -41,7 +41,7 @@ const observer = {
         })
     },
     showCustomerDeliveryDetails:()=>{
-        app.get('obvcudeliv',async(req,res)=>{
+        app.get('/obvcudeliv',async(req,res)=>{
             try {
                 const customer = Customer.find({UserName:req.body.UserName},{Deliveries:true});
                 res.status(200).json(customer);

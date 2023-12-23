@@ -26,7 +26,7 @@ const admin = {
         })
     },
     removeAUser:()=>{
-        app.delete('armuser',async(req,res)=>{
+        app.delete('/armuser',async(req,res)=>{
             try {
             const customer = await Customer.deleteOne({UserName:req.body.UserName},{});
             res.status(200).json(customer);
@@ -36,7 +36,7 @@ const admin = {
         })
     },
     shareGenralMessage:()=>{
-        app.put('amsguser',async(req,res)=>{
+        app.put('/amsguser',async(req,res)=>{
             try {
                 const customer = await Customer.updateMany({},{Notifications:req.body.Notifications});
                 const rider = await Rider.updateMany({},{Notifications:req.body.Notifications});
@@ -48,7 +48,7 @@ const admin = {
         })
     },
     showCustomerDeliveryDetails:()=>{
-        app.get('avcudeliv',async(req,res)=>{
+        app.get('/avcudeliv',async(req,res)=>{
             try {
                 const customer = Customer.find({UserName:req.body.UserName},{Deliveries:true});
                 res.status(200).json(customer);
