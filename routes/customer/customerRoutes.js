@@ -5,8 +5,11 @@ const app  = express();
 
 
 const cust = {
+    login:()=>{
+        app.get()
+    },
     register:()=>{
-        app.post("/patient",async(req,res)=>{
+        app.post("/custregister",async(req,res)=>{
             const check = await Customer.find({FirstName:req.body.FirstName,Surname:req.body.Surname},{FirstName:true});
           
                 if (check.length==0) {
@@ -25,7 +28,7 @@ const cust = {
 
     },
     messageRider:()=>{
-        app.put('cusmsgrider',async(req,res)=>{
+        app.put('custmsgrider',async(req,res)=>{
             try {
                 const rider = Rider.findOneAndUpdate({UserName:req.body.UserName},{Messages:req.body.Messages});
                 res.status(200).json(rider);
@@ -33,5 +36,38 @@ const cust = {
                 console.log(error.message);
             }
         })
+    },
+    requestDelivery: ()=>{
+        app.put('custdelireq',async(req,res)=>{
+            try {
+                const delivery = await Customer.findOneAndUpdate({UserName:req.body.UserName},{Deliveries:req.body.Deliveries});
+                res.status(200).json(delivery);
+            } catch (error) {
+                console.log(error.message);
+            }
+        })
+    },
+    location: () => {
+        app.put('custlocation',async(req,res)=>{
+            try {
+                const location = await Customer.findOneAndUpdate({UserName:req.body.UserName},{Location:req.body.Location});
+                res.status(200).json(location);
+            } catch (error) {
+                console.log(error.message);
+            }
+        })
+    },
+    pay:  () => {
+
     }
+}
+
+
+export default function CustomerRoutes() {
+    cust.location();
+    cust.login();
+    cust.messageRider();
+    cust.pay();
+    cust.requestDelivery();
+    cust.register();
 }
