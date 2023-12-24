@@ -13,7 +13,7 @@ router2.use((req,res,next)=>{
 
 
         router2.post("/custregister",async(req,res)=>{
-            const check = await Customer.find({FirstName:req.body.FirstName,Surname:req.body.Surname},{FirstName:true});
+            const check = await Customer.find({UserName:req.body.UserName},{});
           
                 if (check.length==0) {
                     const customer = await Customer.create(req.body);

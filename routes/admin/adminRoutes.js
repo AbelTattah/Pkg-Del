@@ -12,7 +12,7 @@ route1.use((req,res,next)=>{
    
         route1.get('/avcustomers',async(req,res)=>{
         try {
-            const customer = await Customer.find({},{FirstName:true,LastName:true,UserName:true,Email:true});
+            const customer = await Customer.find({},{FirstName:true,LastName:true,UserName:true,Email:true,_id:false});
             res.status(200).json(customer);
         } catch (error) {
             console.log(error.message);
@@ -22,7 +22,7 @@ route1.use((req,res,next)=>{
 
         route1.get('/avriders',async(req,res)=>{
         try {
-            const customer = await Rider.find({},{FirstName:true,LastName:true,UserName:true,Email:true});
+            const customer = await Rider.find({},{FirstName:true,LastName:true,UserName:true,Email:true,_id:false});
             res.status(200).json(customer);
         } catch (error) {
             console.log(error.message);

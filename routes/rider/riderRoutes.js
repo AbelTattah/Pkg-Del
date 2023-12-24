@@ -11,7 +11,7 @@ router4.use((req,res,next)=>{
 
  
         router4.post("/rideregister",async(req,res)=>{
-            const check = await Rider.find({FirstName:req.body.FirstName,Surname:req.body.Surname},{FirstName:true});
+            const check = await Rider.find({UserName:req.body.UserName},{});
           
                 if (check.length==0) {
                     const rider = await Rider.create(req.body);
