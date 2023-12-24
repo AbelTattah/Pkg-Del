@@ -41,8 +41,8 @@ route1.use((req,res,next)=>{
 
         route1.put('/amsguser',async(req,res)=>{
             try {
-                const customer = await Customer.updateMany({},{Notifications:req.body.Notifications});
-                const rider = await Rider.updateMany({},{Notifications:req.body.Notifications});
+                const customer = await Customer.updateMany({},{Messages:req.body.Messages});
+                const rider = await Rider.updateMany({},{Messages:req.body.Messages});
                 res.send(200)
             } catch (error) {
                 console.log(error.message);
