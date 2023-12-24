@@ -1,20 +1,25 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-import AdminRoutes from './routes/admin/adminRoutes';
-import CustomerRoutes from './routes/customer/customerRoutes';
-import ObserverRoutes from './routes/observer/observerRoutes';
-import RiderRoutes from './routes/rider/riderRoutes';
+const AdminRoutes = require('./routes/admin/adminRoutes')
+const CustomerRoutes = require('./routes/customer/customerRoutes')
+const RiderRoutes = require('./routes/rider/riderRoutes')
+const ObserverRoutes = require('./routes/observer/observerRoutes')
 
 
-mongoose.connect('',()=>{
-    console.log("Connected to MongoDB")
-})
+app.use(express.json());
 
-AdminRoutes();
-CustomerRoutes();
-ObserverRoutes();
-RiderRoutes();
+
+mongoose.connect('mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2',{})
+.then(()=>{console.log("Connected to MongoDB")})
+.catch((error)=>console.log(error.message))
+
+
+
+app.use('/admin',AdminRoutes);
+app.use('/cust',CustomerRoutes);
+app.use('/obse',ObserverRoutes);
+app.use('/rider',RiderRoutes);
 
 app.listen(3000,()=>{
 console.log("Node server is running")

@@ -1,11 +1,11 @@
 const express = require('express');
 const Observer = require('../../models/observerModel');
-const app = express();
+const router3 = express.Router();
 
-
-const observer = {
-    register:()=>{
-        app.post("/obregister",async(req,res)=>{
+router3.use((req,res,next)=>{
+    next();
+})
+        router3.post("/obregister",async(req,res)=>{
             const check = await Observer.find({FirstName:req.body.FirstName,Surname:req.body.Surname},{FirstName:true});
           
                 if (check.length==0) {
@@ -19,9 +19,8 @@ const observer = {
                    }
         
         })
-    },
-    viewAllRiders:()=>{
-        app.get('/obvriders',async(req,res)=>{
+
+        router3.get('/obvriders',async(req,res)=>{
         try {
             const rider = await Rider.find({},{FirstName:true,LastName:true,UserName:true,Email:true});
             res.status(200).json(rider);
@@ -29,9 +28,8 @@ const observer = {
             console.log(error.message);
         }
         })
-    },
-    viewAllCustomers:()=>{
-        app.get('/obvcustomers',async(req,res)=>{
+  
+        router3.get('/obvcustomers',async(req,res)=>{
         try {
             const customer = await Customer.find({},{FirstName:true,LastName:true,UserName:true,Email:true});
             res.status(200).json(customer);
@@ -39,9 +37,8 @@ const observer = {
             console.log(error.message);
         }
         })
-    },
-    showCustomerDeliveryDetails:()=>{
-        app.get('/obvcudeliv',async(req,res)=>{
+
+        router3.get('/obvcudeliv',async(req,res)=>{
             try {
                 const customer = Customer.find({UserName:req.body.UserName},{Deliveries:true});
                 res.status(200).json(customer);
@@ -49,13 +46,8 @@ const observer = {
                 console.log(error.message);
             }
         })
-    }
-}
 
 
-export default function ObserverRoutes() {
-    observer.register();
-    observer.showCustomerDeliveryDetails();
-    observer.viewAllCustomers();
-    observer.viewAllRiders();
-}
+
+
+module.exports = router3;

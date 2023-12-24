@@ -1,15 +1,16 @@
 const express = require('express');
 const Customer = require('../../models/customerModel');
 const Rider = require('../../models/riderModel');
+const router4 = express.Router();
 const app  = express();
 
+router4.use((req,res,next)=>{
+    next();
+})
 
-const rider = {
-    login:()=>{
-        app.get()
-    },
-    register:()=>{
-        app.post("/rideregister",async(req,res)=>{
+
+ 
+        router4.post("/rideregister",async(req,res)=>{
             const check = await Rider.find({FirstName:req.body.FirstName,Surname:req.body.Surname},{FirstName:true});
           
                 if (check.length==0) {
@@ -23,12 +24,8 @@ const rider = {
                    }
         
         })
-    },
-    login:()=>{
-
-    },
-    messageRider:()=>{
-        app.put('/ridermsgcust',async(req,res)=>{
+ 
+        router4.put('/ridermsgcust',async(req,res)=>{
             try {
                 const customer = Customer.findOneAndUpdate({UserName:req.body.UserName},{Messages:req.body.Messages});
                 res.status(200).json(customer);
@@ -36,9 +33,8 @@ const rider = {
                 console.log(error.message);
             }
         })
-    },
-    acceptDelivery: ()=>{
-        app.put('/rideliaccept',async(req,res)=>{
+ 
+        router4.put('/rideliaccept',async(req,res)=>{
             try {
                 const delivery = await Rider.findOneAndUpdate({UserName:req.body.UserName},{Deliveries:req.body.Deliveries});
                 res.status(200).json(delivery);
@@ -46,9 +42,8 @@ const rider = {
                 console.log(error.message);
             }
         })
-    },
-    location: () => {
-        app.put('/riderlocation',async(req,res)=>{
+  
+        router4.put('/riderlocation',async(req,res)=>{
             try {
                 const location = await Customer.findOneAndUpdate({UserName:req.body.UserName},{Location:req.body.Location});
                 res.status(200).json(location);
@@ -56,18 +51,9 @@ const rider = {
                 console.log(error.message);
             }
         })
-    },
-    pay:  () => {
-
-    }
-}
 
 
-export default function RiderRoutes() {
-    rider.location();
-    rider.login();
-    rider.messageRider();
-    rider.pay();
-    rider.acceptDelivery();
-    rider.register();
-}
+
+
+
+module.exports = router4;
