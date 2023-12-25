@@ -1,6 +1,7 @@
 const express = require('express');
 const Customer = require('../../models/customerModel');
 const Rider = require('../../models/riderModel');
+const Admin = require('../../models/adminModel')
 
 const route1 = express.Router();
 
@@ -8,7 +9,20 @@ route1.use((req,res,next)=>{
     next();
 })
 
+        route1.post("/adminregister",async(req,res)=>{
+        const check = await Admin.find({UserName:req.body.UserName},{});
+  
+        if (check.length==0) {
+            const customer = await Admin.create(req.body);
+            res.status(200).json(customer);
+            console.log("Admin Registered Successfully");
+           }    
+           else {
+            res.status(404).json({message:"Admin Already exists"}); 
+            console.log(check);
+           }
 
+})
    
         route1.get('/avcustomers',async(req,res)=>{
         try {
@@ -53,6 +67,16 @@ route1.use((req,res,next)=>{
         route1.get('/avcudeliv',async(req,res)=>{
             try {
                 const customer = Customer.find({UserName:req.body.UserName},{Deliveries:true});
+                res.status(200).json(customer);
+            } catch (error) {
+                console.log(error.message);
+            }
+        })
+
+
+        route1.get('/avcustdetails',async(req,res)=>{
+            try {
+                const customer = Customer.find({Username:req.body.UserName},{FirstName:true,LastName:true,Email:true,Location:true});
                 res.status(200).json(customer);
             } catch (error) {
                 console.log(error.message);
