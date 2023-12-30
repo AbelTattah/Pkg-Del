@@ -25,7 +25,7 @@ route1.use((req,res,next)=>{
             console.log(check);
            }
 
-})
+        })
    
         route1.get('/avcustomers',async(req,res)=>{
         try {
@@ -79,13 +79,26 @@ route1.use((req,res,next)=>{
 
         route1.get('/avcustdetails',async(req,res)=>{
             try {
-                const customer = Customer.find({Username:req.body.UserName},{FirstName:true,LastName:true,Email:true,Location:true});
+                const customer = await Customer.find({Username:req.body.UserName},{FirstName:true,LastName:true,Email:true,Location:true});
                 res.status(200).json(customer);
             } catch (error) {
                 console.log(error.message);
             }
-        })
+        });
         
+        // Get Riders who are sharing their location
+
+        route1.get('/avrideron',async(req,res)=>{
+            try {
+                const rider = await Rider.find({  Location: {
+                    $exists: true,
+                    $not: { $size: 0 }
+                  }},{FirstName:true,LastName:true,Email:true,Location:true});
+                res.status(200).json(rider);
+            } catch (error) {
+                console.log(error.message);
+            }
+        })
 
 
 
