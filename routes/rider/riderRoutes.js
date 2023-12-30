@@ -3,6 +3,8 @@ const Customer = require('../../models/customerModel');
 const Rider = require('../../models/riderModel');
 const router4 = express.Router();
 const app  = express();
+const cors = require('cors');
+app.use(cors());
 
 router4.use((req,res,next)=>{
     next();
@@ -45,7 +47,7 @@ router4.use((req,res,next)=>{
   
         router4.put('/riderlocation',async(req,res)=>{
             try {
-                const location = await Customer.findOneAndUpdate({UserName:req.body.UserName},{Location:req.body.Location});
+                const location = await Rider.findOneAndUpdate({UserName:req.body.UserName},{Location:req.body.Location});
                 res.status(200).json(location);
             } catch (error) {
                 console.log(error.message);

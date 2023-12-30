@@ -2,7 +2,8 @@ const express = require('express');
 const Customer = require('../../models/customerModel');
 const Rider = require('../../models/riderModel');
 const app  = express();
-
+const cors = require('cors');
+app.use(cors());
 const router2 = express.Router();
 
 router2.use((req,res,next)=>{

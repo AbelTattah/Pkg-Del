@@ -2,6 +2,9 @@ const express = require('express');
 const Customer = require('../../models/customerModel');
 const Rider = require('../../models/riderModel');
 const Admin = require('../../models/adminModel')
+const cors = require('cors');
+const app = express();
+app.use(cors());
 
 const route1 = express.Router();
 
@@ -36,7 +39,7 @@ route1.use((req,res,next)=>{
 
         route1.get('/avriders',async(req,res)=>{
         try {
-            const customer = await Rider.find({},{FirstName:true,LastName:true,UserName:true,Email:true,_id:false});
+            const customer = await Rider.find({},{FirstName:true,LastName:true,UserName:true,Email:true,_id:false,Location:true});
             res.status(200).json(customer);
         } catch (error) {
             console.log(error.message);

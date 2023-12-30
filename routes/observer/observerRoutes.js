@@ -1,6 +1,9 @@
 const express = require('express');
 const Observer = require('../../models/observerModel');
 const router3 = express.Router();
+const app  = express();
+const cors = require('cors');
+app.use(cors());
 
 router3.use((req,res,next)=>{
     next();
