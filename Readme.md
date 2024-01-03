@@ -36,8 +36,4 @@ This repository contains the backend code for a Package Delivery App. The backen
 - `/cust/custdelireq`: Request a delivery.
 - `/cust/custlocation`: Record the customer's location.
 
-bash
-Copy code
-npm start
-Contributing
-If you would like to contribute to the development of this backend, please follow the Contribution Guidelines.
+
