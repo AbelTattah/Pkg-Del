@@ -93,7 +93,7 @@ route1.use((req,res,next)=>{
                 const rider = await Rider.find({  Location: {
                     $exists: true,
                     $not: { $size: 0 }
-                  }},{FirstName:true,LastName:true,Email:true,Location:true});
+                  }},{FirstName:true,LastName:true,Email:true,Location:true,_id:true});
                 res.status(200).json(rider);
             } catch (error) {
                 console.log(error.message);

@@ -7,6 +7,7 @@ const RiderRoutes = require('./routes/rider/riderRoutes')
 const ObserverRoutes = require('./routes/observer/observerRoutes')
 const cors = require('cors');
 
+
 app.use(express.json());
 
 
