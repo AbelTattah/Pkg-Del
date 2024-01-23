@@ -1,30 +1,27 @@
-const mongoose = require("mongoose");
-
+const mongoose = require('mongoose')
 
 const observerSchema = mongoose.Schema({
   FirstName: {
     type: String,
-    required: true,
+    required: true
   },
   LastName: {
     type: String,
-    required: true,
+    required: true
   },
   UserName: {
     type: String,
-    required: true,
+    required: true
   },
   Email: {
     type: String,
-    required: true,
+    required: true
   },
   Messages: {
-    type: Array,
-  },
-});
+    type: Array
+  }
+})
 
+const Observer = mongoose.model('pkgobserver', observerSchema)
 
-const Observer = mongoose.model("pkgobserver", observerSchema);
-
-
-module.exports = Observer;
+module.exports = Observer

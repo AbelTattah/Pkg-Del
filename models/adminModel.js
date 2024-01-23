@@ -1,30 +1,27 @@
-const mongoose = require("mongoose");
-
+const mongoose = require('mongoose')
 
 const adminSchema = mongoose.Schema({
   FirstName: {
     type: String,
-    required: true,
+    required: true
   },
   LastName: {
     type: String,
-    required: true,
+    required: true
   },
   UserName: {
     type: String,
-    required: true,
+    required: true
   },
   Email: {
     type: String,
-    required: true,
+    required: true
   },
   Messages: {
-    type: Array,
-  },
-});
+    type: Array
+  }
+})
 
+const Admin = mongoose.model('pkgadmin', adminSchema)
 
-const Admin = mongoose.model("pkgadmin", adminSchema);
-
-
-module.exports = Admin;
+module.exports = Admin

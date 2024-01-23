@@ -1,36 +1,33 @@
-const mongoose = require("mongoose");
-
+const mongoose = require('mongoose')
 
 const riderSchema = mongoose.Schema({
   FirstName: {
     type: String,
-    required: true,
+    required: true
   },
   LastName: {
     type: String,
-    required: true,
+    required: true
   },
   UserName: {
     type: String,
-    required: true,
+    required: true
   },
   Email: {
     type: String,
-    required: true,
+    required: true
   },
   Location: {
-    type: Array,
+    type: Array
   },
   Messages: {
-    type: Array,
+    type: Array
   },
   Deliveries: {
-    type: Array,
-  },
-});
+    type: Array
+  }
+})
 
+const Rider = mongoose.model('pkgrider', riderSchema)
 
-const Rider = mongoose.model("pkgrider", riderSchema);
-
-
-module.exports = Rider;
+module.exports = Rider
