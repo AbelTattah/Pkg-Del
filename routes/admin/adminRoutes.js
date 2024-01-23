@@ -15,7 +15,7 @@ route1.use((req, res, next) => {
 route1.post('/adminregister', async (req, res) => {
   const check = await Admin.find({ UserName: req.body.UserName }, {})
 
-  if (check.length == 0) {
+  if (check.length === 0) {
     const customer = await Admin.create(req.body)
     res.status(200).json(customer)
     console.log('Admin Registered Successfully')
@@ -81,7 +81,7 @@ route1.put('/amsguser', async (req, res) => {
       { Messages: req.body.Messages }
     )
     const rider = await Rider.updateMany({}, { Messages: req.body.Messages })
-    res.send(200)
+    res.send(200).json({ customer, rider })
   } catch (error) {
     console.log(error.message)
     console.log('Error Sending notifications')

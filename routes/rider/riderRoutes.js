@@ -13,7 +13,7 @@ router4.use((req, res, next) => {
 router4.post('/rideregister', async (req, res) => {
   const check = await Rider.find({ UserName: req.body.UserName }, {})
 
-  if (check.length == 0) {
+  if (check.length === 0) {
     const rider = await Rider.create(req.body)
     res.status(200).json(rider)
     console.log('Rider Registered Successfully')

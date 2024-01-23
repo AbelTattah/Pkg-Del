@@ -6,7 +6,7 @@ This repository contains the backend code for a Package Delivery App. The backen
 
 ## Routes or Endpoints
 
-### Admin:
+### Admin
 - `/admin/adminregister`:Register an admin.
 - `/admin/avcustomers`: View all users.
 - `/admin/avriders`: View all riders.
@@ -15,21 +15,21 @@ This repository contains the backend code for a Package Delivery App. The backen
 - `/admin/avcudeliv`: View the delivery details of a particular user.
 - `/admin/avcustdetails`: View the details of a particular customer.
 
-### Observer:
+### Observer
 
 - `/obregister`: Register as an observer.
 - `/obse/obvriders`: View all riders.
 - `/obse/obvcustomers`: View all customers.
 - `/obse/obvcudeliv`: View delivery details of a particular rider.
 
-### Rider:
+### Rider
 
 - `/rider/rideregister`: Register as a rider.
 - `/rider/ridermsgcust`: Message a customer.
 - `/rider/rideliaccept`: Accept a delivery.
 - `/rider/riderlocation`: Record the rider's location.
 
-### Customer:
+### Customer
 
 - `/cust/custregister`: Register as a customer.
 - `/cust/custmsgrider`: Message a rider.
