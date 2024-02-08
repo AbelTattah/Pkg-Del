@@ -100,10 +100,10 @@ route1.get('/avcudeliv', async (req, res) => {
   }
 })
 
-route1.get('/avcustdetails', async (req, res) => {
+route1.get('/avcustdetails/:username', async (req, res) => {
   try {
     const customer = await Customer.find(
-      { UserName: req.body.UserName },
+      { UserName: req.params.username },
       { FirstName: true, LastName: true, Email: true, Location: true }
     )
     res.status(200).json(customer)
