@@ -26,7 +26,6 @@ const customerSchema = mongoose.Schema({
   Deliveries: {
     type: Array
   }
-
 })
 
 const Customer = mongoose.model('pkgcustomer', customerSchema)

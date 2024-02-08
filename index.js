@@ -9,15 +9,24 @@ const cors = require('cors')
 
 app.use(express.json())
 
-mongoose.connect('mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2', {})
-  .then(() => { console.log('Connected to MongoDB') })
+mongoose
+  .connect(
+    'mongodb+srv://tattahabelk:Abel1919@cluster0.bkxk0nq.mongodb.net/',
+    {}
+  )
+  .then(() => {
+    console.log('Connected to MongoDB')
+  })
   .catch((error) => console.log(error.message))
 
 app.use(cors())
 
 app.use('/admin', AdminRoutes)
+
 app.use('/cust', CustomerRoutes)
+
 app.use('/obse', ObserverRoutes)
+
 app.use('/rider', RiderRoutes)
 
 app.listen(4000, () => {
