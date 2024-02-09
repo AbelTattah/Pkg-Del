@@ -20,6 +20,10 @@ const riderSchema = mongoose.Schema({
   Location: {
     type: Array
   },
+  Phone: {
+    type: Number,
+    required: true
+  },
   Messages: {
     type: Array
   },
