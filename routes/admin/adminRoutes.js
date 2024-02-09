@@ -88,6 +88,15 @@ route1.put('/amsguser', async (req, res) => {
   }
 })
 
+route1.get('/avmessages/:username',async(req,res)=>{
+  try {
+    const message = await Admin.find({UserName:req.params.username},{Messages:true})
+    res.status(200).json(message)
+  } catch (error) {
+    console.log(error.message)
+  }
+})
+
 route1.get('/avcudeliv', async (req, res) => {
   try {
     const customer = Customer.find(
