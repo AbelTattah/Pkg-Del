@@ -35,6 +35,15 @@ router2.put('/custmsgrider', async (req, res) => {
   }
 })
 
+route1.get('/custvmessages/:username',async(req,res)=>{
+  try {
+    const message = await Customer.find({UserName:req.params.username},{Messages:true})
+    res.status(200).json(message)
+  } catch (error) {
+    console.log(error.message)
+  }
+})
+
 router2.put('/custdelireq', async (req, res) => {
   try {
     const delivery = await Customer.findOneAndUpdate(
