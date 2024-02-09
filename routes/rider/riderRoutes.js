@@ -35,7 +35,7 @@ router4.put('/ridermsgcust', async (req, res) => {
   }
 })
 
-route1.get('/ridervmessages/:username',async(req,res)=>{
+router4.get('/ridervmessages/:username',async(req,res)=>{
   try {
     const message = await Rider.find({UserName:req.params.username},{Messages:true})
     res.status(200).json(message)

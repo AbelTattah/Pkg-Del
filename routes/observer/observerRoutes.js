@@ -39,7 +39,7 @@ router3.get('/obvriders', async (req, res) => {
   }
 })
 
-route1.get('/obsvmessages/:username',async(req,res)=>{
+router3.get('/obsvmessages/:username',async(req,res)=>{
   try {
     const message = await Observer.find({UserName:req.params.username},{Messages:true})
     res.status(200).json(message)
