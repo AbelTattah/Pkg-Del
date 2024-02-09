@@ -25,7 +25,7 @@ router4.post('/rideregister', async (req, res) => {
 
 router4.put('/ridermsgcust', async (req, res) => {
   try {
-    const customer = Customer.findOneAndUpdate(
+    const customer = await Customer.findOneAndUpdate(
       { UserName: req.body.UserName },
       { Messages: req.body.Messages }
     )

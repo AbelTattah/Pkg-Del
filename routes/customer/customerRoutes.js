@@ -25,7 +25,7 @@ router2.post('/custregister', async (req, res) => {
 
 router2.put('/custmsgrider', async (req, res) => {
   try {
-    const rider = Rider.findOneAndUpdate(
+    const rider = await Rider.findOneAndUpdate(
       { UserName: req.body.UserName },
       { Messages: req.body.Messages }
     )
