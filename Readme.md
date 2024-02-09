@@ -28,6 +28,7 @@ This repository contains the backend code for a Package Delivery App. The backen
 
 - `/rider/rideregister`: Register as a rider.
 - `/rider/ridermsgcust`: Message a customer.
+- `/rider/ridervmessages`: Request for a rider's messages
 - `/rider/rideliaccept`: Accept a delivery.
 - `/rider/riderlocation`: Record the rider's location.
 
@@ -36,6 +37,7 @@ This repository contains the backend code for a Package Delivery App. The backen
 - `/cust/custregister`: Register as a customer.
 - `/cust/custmsgrider`: Message a rider.
 - `/cust/custdelireq`: Request a delivery.
+- `/cust/custvmessages`: See a customer's messages
 - `/cust/custlocation`: Record the customer's location.
 
 
