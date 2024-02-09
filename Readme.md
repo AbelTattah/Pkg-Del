@@ -17,7 +17,8 @@ This repository contains the backend code for a Package Delivery App. The backen
 - `/admin/amsguser`: Message all users.
 - `/admin/avmessages`: View an admin's messages
 - `/admin/avcudeliv`: View the delivery details of a particular user.
-- `/admin/avcustdetails`: View the details of a particular customer.
+- `/admin/avcustdetails/:username`: View the details of a particular customer.
+- `/admin/avriderdetails/:username`: View the details of a particular rider
 
 ### Observer
 
