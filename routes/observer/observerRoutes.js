@@ -39,6 +39,15 @@ router3.get('/obvriders', async (req, res) => {
   }
 })
 
+route1.get('/obsvmessages/:username',async(req,res)=>{
+  try {
+    const message = await Observer.find({UserName:req.params.username},{Messages:true})
+    res.status(200).json(message)
+  } catch (error) {
+    console.log(error.message)
+  }
+})
+
 router3.get('/obvcustomers', async (req, res) => {
   try {
     const customer = await Customer.find(

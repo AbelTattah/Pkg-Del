@@ -12,6 +12,7 @@ This repository contains the backend code for a Package Delivery App. The backen
 - `/admin/avriders`: View all riders.
 - `/admin/armuser`: Remove a user.
 - `/admin/amsguser`: Message all users.
+- `/admin/avmessages`: View an admin's messages
 - `/admin/avcudeliv`: View the delivery details of a particular user.
 - `/admin/avcustdetails`: View the details of a particular customer.
 
@@ -19,6 +20,7 @@ This repository contains the backend code for a Package Delivery App. The backen
 
 - `/obregister`: Register as an observer.
 - `/obse/obvriders`: View all riders.
+- `/obse/obsvmessages`: View observer's messages
 - `/obse/obvcustomers`: View all customers.
 - `/obse/obvcudeliv`: View delivery details of a particular rider.
 
