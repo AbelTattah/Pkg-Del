@@ -13,9 +13,10 @@ route1.use((req, res, next) => {
   next();
 });
 
+//Register an admin
 route1.post("/adminregister", async (req, res) => {
   const check = await Admin.find({ UserName: req.body.UserName }, {});
-
+  // Make sure that the admin does not exist already
   if (check.length === 0) {
     const customer = await Admin.create(req.body);
     res.status(200).json(customer);
@@ -26,6 +27,7 @@ route1.post("/adminregister", async (req, res) => {
   }
 });
 
+//View all customers
 route1.get("/avcustomers", async (req, res) => {
   try {
     const customer = await Customer.find(
@@ -44,6 +46,7 @@ route1.get("/avcustomers", async (req, res) => {
   }
 });
 
+//View all riders
 route1.get("/avriders", async (req, res) => {
   try {
     const customer = await Rider.find(
@@ -63,10 +66,11 @@ route1.get("/avriders", async (req, res) => {
   }
 });
 
-route1.delete("/armuser", async (req, res) => {
+//Remove a customer by deleting their document
+route1.delete("/armuser/:username", async (req, res) => {
   try {
     const customer = await Customer.deleteOne(
-      { UserName: req.body.UserName },
+      { UserName: req.params.username },
       {}
     );
     res.status(200).json(customer);
@@ -75,6 +79,7 @@ route1.delete("/armuser", async (req, res) => {
   }
 });
 
+//Message all users
 route1.put("/amsgusers", async (req, res) => {
   try {
     const customer = await Customer.updateMany(
@@ -89,10 +94,11 @@ route1.put("/amsgusers", async (req, res) => {
   }
 });
 
-route1.put("amsgcust", async (req, res) => {
+//Message a particular customer
+route1.put("amsgcust/:username", async (req, res) => {
   try {
     const customer = await Customer.findOneAndUpdate(
-      { UserName: req.body.UserName },
+      { UserName: req.params.username },
       { Messages: req.body.Messages }
     );
     res.status(200).json(customer);
@@ -101,10 +107,11 @@ route1.put("amsgcust", async (req, res) => {
   }
 });
 
-route1.put("amsgrider", async (req, res) => {
+//Message a particular rider
+route1.put("amsgrider/:username", async (req, res) => {
   try {
     const customer = await Rider.findOneAndUpdate(
-      { UserName: req.body.UserName },
+      { UserName: req.params.username },
       { Messages: req.body.Messages }
     );
     res.status(200).json(customer);
@@ -113,10 +120,11 @@ route1.put("amsgrider", async (req, res) => {
   }
 });
 
-route1.put("amsgobserver", async (req, res) => {
+//Message a particular observer
+route1.put("amsgobserver/:username", async (req, res) => {
   try {
     const customer = await Observer.findOneAndUpdate(
-      { UserName: req.body.UserName },
+      { UserName: req.params.username },
       { Messages: req.body.Messages }
     );
     res.status(200).json(customer);
@@ -125,6 +133,7 @@ route1.put("amsgobserver", async (req, res) => {
   }
 });
 
+//Get all messages for a particular Admin
 route1.get("/avmessages/:username", async (req, res) => {
   try {
     const message = await Admin.find(
@@ -137,10 +146,11 @@ route1.get("/avmessages/:username", async (req, res) => {
   }
 });
 
-route1.get("/avcudeliv", async (req, res) => {
+//Get all delivery details for a particular customer
+route1.get("/avcudeliv/:username", async (req, res) => {
   try {
     const customer = Customer.find(
-      { UserName: req.body.UserName },
+      { UserName: req.params.username },
       { Deliveries: true }
     );
     res.status(200).json(customer);
@@ -149,6 +159,7 @@ route1.get("/avcudeliv", async (req, res) => {
   }
 });
 
+//Get the details for a particular customer
 route1.get("/avcustdetails/:username", async (req, res) => {
   try {
     const customer = await Customer.find(
@@ -161,6 +172,7 @@ route1.get("/avcustdetails/:username", async (req, res) => {
   }
 });
 
+//Get the details for a particular rider
 route1.get("/avriderdetails/:username", async (req, res) => {
   try {
     const customer = await Rider.find(
@@ -174,7 +186,6 @@ route1.get("/avriderdetails/:username", async (req, res) => {
 });
 
 // Get Riders who are sharing their location
-
 route1.get("/avrideron", async (req, res) => {
   try {
     const rider = await Rider.find(
