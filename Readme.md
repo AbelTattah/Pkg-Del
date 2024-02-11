@@ -211,7 +211,7 @@ async function sendMessage() {
 
 ```
 
-Use the various routes with axios or the fetch api to make various requests depending
+Use the various routes with axios or the fetch API to make various requests depending
 on your use case.
 
 Happy Hacking.
