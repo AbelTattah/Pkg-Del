@@ -6,6 +6,7 @@ const CustomerRoutes = require('./routes/customer/customerRoutes')
 const RiderRoutes = require('./routes/rider/riderRoutes')
 const ObserverRoutes = require('./routes/observer/observerRoutes')
 const cors = require('cors')
+require('dotenv').config()
 
 app.use(express.json())
 

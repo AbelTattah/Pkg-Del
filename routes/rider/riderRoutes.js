@@ -76,4 +76,31 @@ router4.put('/riderlocation', async (req, res) => {
   }
 })
 
+//View a rider's pending deliveries
+router4.get('/riderpending/:username', async (req, res) => {
+  try {
+    const delivery = await Rider.find(
+      { UserName: req.params.username },
+      { Deliveries: true }
+    )
+    res.status(200).json(delivery)
+  } catch (error) {
+    console.log(error.message)
+  }
+})
+
+//Rider delivery Request
+router4.put('/riderdelireq/:username', async (req, res) => {
+  try {
+    const delivery = await Rider.findOneAndUpdate(
+      { UserName: req.params.username },
+      { Deliveries: req.body.Deliveries }
+    )
+    res.status(200).json(delivery)
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+)
+
 module.exports = router4

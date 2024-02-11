@@ -187,6 +187,7 @@ route1.get('/avriderdetails/:username', async (req, res) => {
 
 // Get Riders who are sharing their location
 route1.get('/avrideron', async (req, res) => {
+  console.log("Handling request");
   try {
     const rider = await Rider.find(
       {
@@ -195,7 +196,7 @@ route1.get('/avrideron', async (req, res) => {
           $not: { $size: 0 }
         }
       },
-      { FirstName: true, LastName: true, Email: true, Location: true }
+      { FirstName: true,UserName:true , LastName: true, Email: true, Location: true }
     )
     res.status(200).json(rider)
   } catch (error) {
