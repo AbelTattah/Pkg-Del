@@ -159,14 +159,22 @@ async function handleDeliveryRequests(
       recipientPhone.length === 10)
   ) {
     console.log("Delivery request validated");
-    const riders = await axios.get(`${process.env.URL}/admin/avrideron`);
-    console.log("Riders available: ", riders.data);
-    if (riders.data.length === 0) {
+    const riders = await Rider.find(
+      {
+        Location: {
+          $exists: true,
+          $not: { $size: 0 }
+        }
+      },
+      { FirstName: true,UserName:true , LastName: true, Email: true, Location: true }
+    )
+    console.log("Riders available: ", riders);
+    if (riders.length === 0) {
       return res.status(406).json({ message: "No riders available" });
     } else {
-      console.log("Number Riders available: ", riders.data.length);
+      console.log("Number Riders available: ", riders.length);
       //Arrange the coordinates of the riders in an array
-      arrangeArrayofCoords(riders.data);
+      arrangeArrayofCoords(riders);
 
       console.log("Array of coordinates: ", arrayofCoords);
       //Get the closest rider
@@ -176,17 +184,18 @@ async function handleDeliveryRequests(
         long: senderLocation[1],
       });
 
-      var usernameOfRider = riders.data[closestRiderIndex].UserName;
+      var usernameOfRider = riders[closestRiderIndex].UserName;
 
       console.log("Rider Username: ", usernameOfRider);
 
       //Get the pending deliveries of the rider
-      var pendingDeliveries = await axios.get(
-        `${process.env.URL}/rider/riderpending/${usernameOfRider}`
-      );
+      var pendingDeliveries = await Rider.find(
+      { UserName: usernameOfRider },
+      { Deliveries: true }
+    )
 
-      console.log("Pending deliveries Status: ", pendingDeliveries.status);
-      var deliveries = pendingDeliveries.data[0].Deliveries;
+  
+      var deliveries = pendingDeliveries[0].Deliveries;
 
       console.log("Pending deliveries: ", deliveries);
 
@@ -201,10 +210,10 @@ async function handleDeliveryRequests(
       console.log("Distance of rider: ", distanceOfRider);
 
       //Send the delivery request to the closest rider
-      const deliveryRequest = await axios.put(
-        `${process.env.URL}/rider/riderdelireq/${usernameOfRider}`,
+      const deliveryRequest = await Rider.findOneAndUpdate(
+        { UserName: usernameOfRider },
         { Deliveries: deliveries }
-      );
+      )
 
       return res.status(200).json({ message: "Delivery request sent" });
     }
