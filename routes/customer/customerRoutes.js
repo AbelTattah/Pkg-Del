@@ -66,8 +66,10 @@ router2.put("/custdelireq", async (req, res) => {
   }
 });
 
+//Variables for finding closest rider
 var closestRiderIndex = 0;
 var distanceOfRider = 0;
+var arrayofCoords = [];
 
 //Find closest coordinate
 function findClosestCoordinate(coordinates, targetCoordinate) {
@@ -93,10 +95,10 @@ function findClosestCoordinate(coordinates, targetCoordinate) {
     const distance = getDistance(coordinates[i], targetCoordinate);
     if (distance < minDistance) {
       minDistance = distance;
-      distanceOfRider = minDistance;
       closestCoordinate = coordinates[i];
       closestRiderIndex = i;
     }
+    distanceOfRider = minDistance;
   }
 
   console.log(
@@ -127,6 +129,17 @@ function getDistance(coord1, coord2) {
   return distance;
 }
 
+//Arrange array of Coordinates
+async function arrangeArrayofCoords(array) {
+  for (var i = 0; i < array.length; i++) {
+    console.log(`Rider ${i} location: `, array[i].Location[0]);
+    arrayofCoords.push({
+      lat: array[i].Location[0],
+      long: array[i].Location[1],
+    });
+  }
+}
+
 //Handle delivery requests
 async function handleDeliveryRequests(
   packageType,
@@ -151,14 +164,11 @@ async function handleDeliveryRequests(
     if (riders.data.length === 0) {
       return res.status(406).json({ message: "No riders available" });
     } else {
-      var arrayofCoords = [];
+      console.log("Number Riders available: ", riders.data.length);
       //Arrange the coordinates of the riders in an array
-      for (var i; i < riders.data.length; i++) {
-        arrayofCoords.push({
-          lat: riders[i].Location[0],
-          long: riders[i].Location[1],
-        });
-      }
+      arrangeArrayofCoords(riders.data);
+
+      console.log("Array of coordinates: ", arrayofCoords);
       //Get the closest rider
       console.log("Finding closest rider");
       const closestRider = findClosestCoordinate(arrayofCoords, {
@@ -166,14 +176,19 @@ async function handleDeliveryRequests(
         long: senderLocation[1],
       });
 
-      var usernameOfRider = riders[closestRider].UserName;
+      var usernameOfRider = riders.data[closestRiderIndex].UserName;
+
+      console.log("Rider Username: ", usernameOfRider);
 
       //Get the pending deliveries of the rider
-      const pendingDeliveries = await axios.get(
+      var pendingDeliveries = await axios.get(
         `${process.env.URL}/rider/riderpending/${usernameOfRider}`
       );
 
-      var deliveries = pendingDeliveries.data.Deliveries;
+      console.log("Pending deliveries Status: ", pendingDeliveries.status);
+      var deliveries = pendingDeliveries.data[0].Deliveries;
+
+      console.log("Pending deliveries: ", deliveries);
 
       deliveries.push({
         UserName: UserName,
@@ -182,6 +197,8 @@ async function handleDeliveryRequests(
         recipientLocation: recipientLocation,
         recipientPhone: recipientPhone,
       });
+
+      console.log("Distance of rider: ", distanceOfRider);
 
       //Send the delivery request to the closest rider
       const deliveryRequest = await axios.put(
