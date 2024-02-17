@@ -35,6 +35,7 @@ This repository contains the backend code for a Package Delivery App. The backen
 - `/rider/ridervmessages/username`: Request for a rider's messages
 - `/rider/rideliaccept`: Accept a delivery.
 - `/rider/riderlocation`: Record the rider's location.
+- `/riderpending/:username`: Get a rider's pending delivery requests
 
 ### Customer
 
