@@ -199,7 +199,7 @@ async function handleDeliveryRequests(
 
       console.log("Pending deliveries: ", deliveries);
 
-      deliveries.push({
+      deliveries.unshift({
         UserName: UserName,
         packageType: packageType,
         description: description,
@@ -223,6 +223,7 @@ async function handleDeliveryRequests(
   }
 }
 
+//Customer Delivery Request Handling route
 router2.put("/custdelihandle", async (req, res) => {
   console.log("Handling delivery request");
   handleDeliveryRequests(
