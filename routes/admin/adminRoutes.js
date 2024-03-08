@@ -1,11 +1,16 @@
-const express = require('express')
-const Customer = require('../../models/customerModel')
-const Rider = require('../../models/riderModel')
-const Admin = require('../../models/adminModel')
+const express = require('express') // Import express
+const Customer = require('../../models/customerModel') // Import customer model
+const Rider = require('../../models/riderModel') // Import rider model
+const Admin = require('../../models/adminModel') // Import admin model
 const cors = require('cors')
-const Observer = require('../../models/observerModel')
+const Observer = require('../../models/observerModel') // Import observer model
+
+// Create express instance
 const app = express()
+
+// Middleware
 app.use(cors())
+
 
 const route1 = express.Router()
 
