@@ -196,8 +196,8 @@ import axios from 'axios'
 
 */
 
-// You can use State here depending on your usecase
-var rider's username = "abitoshaker"
+// You can use State here depending on your app
+var riderusername = "abitoshaker"
 var customerMessages = []
 var newMessage = "Hi"
 var conversation = []
