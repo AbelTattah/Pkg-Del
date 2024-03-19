@@ -185,8 +185,7 @@ async function getCustomersMessages(username) {
 
 ###### Sending a message
 
-```
-   javascript
+```javascript
 
 import axios from 'axios'
 
