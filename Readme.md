@@ -54,7 +54,10 @@ This is the general schema for Admins, Riders, Customers and Observers:
 
 ### Admin
 - `/admin/adminregister`:Register an admin.
+
+
 Example:
+
 ```javascript
 const signUp = async( firstname, lastname, username, email ) => {
     try {
@@ -79,6 +82,8 @@ const signUp = async( firstname, lastname, username, email ) => {
 }
 ```
 - `/admin/avcustomers`: View all customers.
+
+
 Example:
 ```javascript
 async function getCustomersMessages(username) {
@@ -92,6 +97,8 @@ async function getCustomersMessages(username) {
 } 
 ```
 - `/admin/avriders`: View all riders.
+
+
 Example:
 
 ```javascript
@@ -106,6 +113,9 @@ async function getCustomersMessages(username) {
 } 
 ```
 - `/admin/armuser/:username`: Remove a user.
+
+
+
 Example:
 
 ```javascript
